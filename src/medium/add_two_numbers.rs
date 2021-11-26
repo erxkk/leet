@@ -66,30 +66,30 @@ impl ListNode {
 // the sum of both
 pub fn add_two_numbers(l1: &Box<ListNode>, l2: &Box<ListNode>) -> Box<ListNode> {
     let mut carry = 0;
-    let mut current_l = Some(l1);
-    let mut current_r = Some(l2);
+    let mut curr_l = Some(l1);
+    let mut curr_r = Some(l2);
 
     // TODO: build from head first without vec
     // it seems that there's no easy way to build a linked list head first
     let mut nodes = vec![];
 
     loop {
-        match (current_l, current_r) {
+        match (curr_l, curr_r) {
             (Some(l), Some(r)) => {
-                current_l = l.next.as_ref();
-                current_r = r.next.as_ref();
+                curr_l = l.next.as_ref();
+                curr_r = r.next.as_ref();
                 nodes.push((l.val + r.val + carry) % 10);
                 carry = (l.val + r.val + carry) / 10;
             }
             (None, Some(r)) => {
-                current_l = None;
-                current_r = r.next.as_ref();
+                curr_l = None;
+                curr_r = r.next.as_ref();
                 nodes.push((r.val + carry) % 10);
                 carry = (r.val + carry) / 10;
             }
             (Some(l), None) => {
-                current_l = l.next.as_ref();
-                current_r = None;
+                curr_l = l.next.as_ref();
+                curr_r = None;
                 nodes.push((l.val + carry) % 10);
                 carry = (l.val + carry) / 10;
             }

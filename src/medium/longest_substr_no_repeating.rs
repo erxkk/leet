@@ -10,20 +10,20 @@ use std::collections::HashSet;
 // all chars are valid ascii
 pub fn length_of_longest_substring(s: &str) -> &str {
     let mut chars = HashSet::new();
-    let mut partitions = vec![];
+    let mut parts = vec![];
 
     let mut prev = 0;
     for (idx, byte) in s.as_bytes().iter().enumerate() {
         if !chars.insert(byte) {
             // already known char, new partition
-            partitions.push(&s[prev..idx]);
+            parts.push(&s[prev..idx]);
             chars.clear();
             chars.insert(byte);
             prev = idx;
         }
     }
 
-    partitions
+    parts
         .into_iter()
         .max_by(|prev, part| prev.len().cmp(&part.len()))
         .unwrap_or("")
