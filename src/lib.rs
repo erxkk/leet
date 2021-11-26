@@ -4,6 +4,7 @@
     option_result_unwrap_unchecked,
     box_into_inner
 )]
+#![allow(dead_code)]
 
 mod easy;
 mod hard;
