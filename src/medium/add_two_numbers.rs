@@ -1,9 +1,9 @@
 // https://leetcode.com/problems/add-two-numbers/
 
 #[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
-    pub val: i32,
-    pub next: Option<Box<ListNode>>,
+struct ListNode {
+    val: i32,
+    next: Option<Box<ListNode>>,
 }
 
 impl ListNode {
@@ -64,7 +64,7 @@ impl ListNode {
 // given 2 linked lists of single digit numbers per node with not trailing 0s
 // (representing a number in reverse order) create a new linked list that is
 // the sum of both
-pub fn add_two_numbers(l1: &Box<ListNode>, l2: &Box<ListNode>) -> Box<ListNode> {
+fn add_two_numbers(l1: &Box<ListNode>, l2: &Box<ListNode>) -> Box<ListNode> {
     let mut carry = 0;
     let mut curr_l = Some(l1);
     let mut curr_r = Some(l2);
@@ -113,23 +113,29 @@ mod test {
     fn simple_carry() {
         let l1 = ListNode::from_slice(&[2, 4, 3]);
         let l2 = ListNode::from_slice(&[5, 6, 4]);
+        let sum = add_two_numbers(&l1, &l2).into_vec();
+
         let res = vec![7, 0, 8];
-        assert_eq!(add_two_numbers(&l1, &l2).into_vec(), res);
+        assert_eq!(sum, res);
     }
 
     #[test]
     fn zero() {
         let l1 = ListNode::from_slice(&[0]);
         let l2 = ListNode::from_slice(&[0]);
+        let sum = add_two_numbers(&l1, &l2).into_vec();
+
         let res = vec![0];
-        assert_eq!(add_two_numbers(&l1, &l2).into_vec(), res);
+        assert_eq!(sum, res);
     }
 
     #[test]
     fn carry_longer() {
         let l1 = ListNode::from_slice(&[9, 9, 9, 9, 9, 9, 9]);
         let l2 = ListNode::from_slice(&[9, 9, 9, 9]);
+        let sum = add_two_numbers(&l1, &l2).into_vec();
+
         let res = vec![8, 9, 9, 9, 0, 0, 0, 1];
-        assert_eq!(add_two_numbers(&l1, &l2).into_vec(), res);
+        assert_eq!(sum, res);
     }
 }

@@ -10,12 +10,12 @@ fn median_single(nums: &Vec<i32>) -> f64 {
     // on even med will be the higher part
     let idx_med = nums.len() / 2;
     if nums.len() % 2 == 0 {
-        // len 4, med 2 & 3
-        // [xxxx] 1 & 2
+        // even length
+        // [xxxx] avg of two
         (nums[idx_med - 1] as f64 + nums[idx_med] as f64) / 2.0
     } else {
-        // len 3, med 2
-        // [xxx] 1
+        // odd length
+        // [xxx] single
         nums[idx_med] as f64
     }
 }
@@ -58,7 +58,7 @@ fn ordered(first: &Vec<i32>, second: &Vec<i32>) -> f64 {
 // time: O((n + m) / 2)
 // mem: O(1)
 // given 2 sorted vectors
-pub fn find_median_sorted_arrays(nums1: &Vec<i32>, nums2: &Vec<i32>) -> f64 {
+fn find_median_sorted_arrays(nums1: &Vec<i32>, nums2: &Vec<i32>) -> f64 {
     // no elements in one or both vec
     match (nums1.len(), nums2.len()) {
         (0, 0) => return 0.0,
@@ -118,49 +118,63 @@ mod test {
     #[test]
     fn both_empty() {
         let (nums1, nums2) = (vec![], vec![]);
-        let m = find_median_sorted_arrays(&nums1, &nums2);
-        assert_eq!(m, 0.0);
+        let median = find_median_sorted_arrays(&nums1, &nums2);
+
+        let res = 0.0;
+        assert_eq!(median, res);
     }
 
     #[test]
     fn empty_odd() {
         let (nums1, nums2) = (vec![0], vec![]);
-        let m = find_median_sorted_arrays(&nums1, &nums2);
-        assert_eq!(m, 0.0);
+        let median = find_median_sorted_arrays(&nums1, &nums2);
+
+        let res = 0.0;
+        assert_eq!(median, res);
     }
 
     #[test]
     fn empty_even() {
         let (nums1, nums2) = (vec![1, 2], vec![]);
-        let m = find_median_sorted_arrays(&nums1, &nums2);
-        assert_eq!(m, 1.5);
+        let median = find_median_sorted_arrays(&nums1, &nums2);
+
+        let res = 1.5;
+        assert_eq!(median, res);
     }
 
     #[test]
     fn ordered_odd() {
         let (nums1, nums2) = (vec![1, 2], vec![3]);
-        let m = find_median_sorted_arrays(&nums1, &nums2);
-        assert_eq!(m, 2.0);
+        let median = find_median_sorted_arrays(&nums1, &nums2);
+
+        let res = 2.0;
+        assert_eq!(median, res);
     }
 
     #[test]
     fn ordered_even() {
         let (nums1, nums2) = (vec![1, 2], vec![3, 4]);
-        let m = find_median_sorted_arrays(&nums1, &nums2);
-        assert_eq!(m, 2.5);
+        let median = find_median_sorted_arrays(&nums1, &nums2);
+
+        let res = 2.5;
+        assert_eq!(median, res);
     }
 
     #[test]
     fn perfect_zip_even() {
         let (nums1, nums2) = (vec![1, 3, 5], vec![2, 4, 6]);
-        let m = find_median_sorted_arrays(&nums1, &nums2);
-        assert_eq!(m, 3.5);
+        let median = find_median_sorted_arrays(&nums1, &nums2);
+
+        let res = 3.5;
+        assert_eq!(median, res);
     }
 
     #[test]
     fn partial_zip_odd() {
         let (nums1, nums2) = (vec![1, 3, 6, 8], vec![2, 7]);
-        let m = find_median_sorted_arrays(&nums1, &nums2);
-        assert_eq!(m, 4.5);
+        let median = find_median_sorted_arrays(&nums1, &nums2);
+
+        let res = 4.5;
+        assert_eq!(median, res);
     }
 }

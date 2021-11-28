@@ -9,7 +9,7 @@ use std::collections::HashMap;
 // mem: O(n)
 // given a vector integers, find the indicies of 2 integers that add up to target
 // only one solution exits
-pub fn two_sum(nums: &Vec<i32>, target: i32) -> (usize, usize) {
+fn two_sum(nums: &Vec<i32>, target: i32) -> (usize, usize) {
     // we don't care about more than 2 appearances per number
     let mut lookup = HashMap::<i32, (usize, usize)>::with_capacity(nums.len());
 
@@ -56,8 +56,10 @@ mod tests {
     fn adjacent_no_duplicate() {
         let vec = vec![2, 7, 11, 15];
         let target = 9;
-        let idx = two_sum(&vec, target);
-        assert_eq!(idx, (0, 1));
+        let indecies = two_sum(&vec, target);
+
+        let res = (0, 1);
+        assert_eq!(indecies, res);
     }
 
     #[test]
@@ -65,7 +67,9 @@ mod tests {
         let vec = vec![2, 3, 4];
         let target = 6;
         let indecies = two_sum(&vec, target);
-        assert_eq!(indecies, (0, 2));
+
+        let res = (0, 2);
+        assert_eq!(indecies, res);
     }
 
     #[test]
@@ -73,7 +77,9 @@ mod tests {
         let vec = vec![3, 3, 4];
         let target = 6;
         let indecies = two_sum(&vec, target);
-        assert_eq!(indecies, (0, 1));
+
+        let res = (0, 1);
+        assert_eq!(indecies, res);
     }
 
     #[test]
@@ -81,6 +87,8 @@ mod tests {
         let vec = vec![1, 3, 4, 3, 3];
         let target = 6;
         let indecies = two_sum(&vec, target);
-        assert_eq!(indecies, (1, 3));
+
+        let res = (1, 3);
+        assert_eq!(indecies, res);
     }
 }

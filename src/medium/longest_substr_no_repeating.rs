@@ -8,7 +8,7 @@ use std::collections::HashSet;
 // mem: O(1)..O(n)
 // given a str, return the longst substr without a duplicate char
 // all chars are valid ascii
-pub fn length_of_longest_substring(s: &str) -> &str {
+fn length_of_longest_substring(s: &str) -> &str {
     let mut chars = HashSet::new();
     let mut parts = vec![];
 
@@ -25,7 +25,7 @@ pub fn length_of_longest_substring(s: &str) -> &str {
 
     parts
         .into_iter()
-        .max_by(|prev, part| prev.len().cmp(&part.len()))
+        .max_by_key(|part| part.len())
         .unwrap_or("")
 }
 
@@ -35,25 +35,37 @@ mod test {
 
     #[test]
     fn simple() {
-        let l = length_of_longest_substring("abcabcbb");
-        assert_eq!(l, "abc");
+        let string = "abcabcbb";
+        let substr = length_of_longest_substring(string);
+
+        let res = "abc";
+        assert_eq!(substr, res);
     }
 
     #[test]
     fn single_repeating() {
-        let l = length_of_longest_substring("bbbbb");
-        assert_eq!(l, "b");
+        let string = "bbbbb";
+        let substr = length_of_longest_substring(string);
+
+        let res = "b";
+        assert_eq!(substr, res);
     }
 
     #[test]
     fn substr_not_subseq() {
-        let l = length_of_longest_substring("pwwkew");
-        assert_eq!(l, "wke");
+        let string = "pwwkew";
+        let substr = length_of_longest_substring(string);
+
+        let res = "wke";
+        assert_eq!(substr, res);
     }
 
     #[test]
     fn empty() {
-        let l = length_of_longest_substring("");
-        assert_eq!(l, "");
+        let string = "";
+        let substr = length_of_longest_substring(string);
+
+        let res = "";
+        assert_eq!(substr, res);
     }
 }
