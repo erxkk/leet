@@ -1,4 +1,4 @@
-// time: O(n)
+// time: O(2 * (n / k) + (n - (2n / k)))
 // mem: O(n)
 // given a str, return the longst substr without a duplicate char
 // all chars are alphabetic and `,` & `.`
@@ -39,6 +39,27 @@ mod test {
     use super::*;
 
     #[test]
+    fn one_row() {
+        let string = "A";
+        let num_rows = 1;
+
+        let res = convert(string, num_rows);
+        assert_eq!(res, "A");
+    }
+
+    #[test]
+    fn two_rows() {
+        let string = "PAYPALISHIRING";
+        let num_rows = 2;
+
+        let res = convert(string, num_rows);
+        assert_eq!(res, "PYAIHRNAPLSIIG");
+
+        // P Y A I H R N
+        // A P L S I I G
+    }
+
+    #[test]
     fn three_rows() {
         let string = "PAYPALISHIRING";
         let num_rows = 3;
@@ -63,14 +84,5 @@ mod test {
         // A   L S  I G
         // Y A   H R
         // P     I
-    }
-
-    #[test]
-    fn single() {
-        let string = "A";
-        let num_rows = 1;
-
-        let res = convert(string, num_rows);
-        assert_eq!(res, "A");
     }
 }
